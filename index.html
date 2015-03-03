@@ -1,0 +1,66 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html>
+
+<!-- Mirrored from www.htmlweb.net/manual/formularios/jscript/calculos/ejemplo_4.html by HTTrack Website Copier/3.x [XR&CO'2004], Wed, 29 Sep 2004 15:02:17 GMT -->
+<head>
+  <title>HTMLWeb. HTML. Formularios. Calculos matematicos. Ejemplo 4</title>
+  <script language="JavaScript" type="text/javascript">
+    function checkChoice(whichbox)
+    {
+        with (whichbox.form)
+        {
+            if (whichbox.checked == false)
+                hiddentotal.value = eval(hiddentotal.value) - eval(whichbox.value);
+            else
+                hiddentotal.value = eval(hiddentotal.value) + eval(whichbox.value);
+            return(formatCurrency(hiddentotal.value));
+        }
+    }
+    function formatCurrency(num)
+    {
+        num = num.toString().replace(/\€|\,/g,'');
+        if(isNaN(num)) 
+            num = "0";
+        cents = Math.floor((num*100+0.5)%100);
+        num = Math.floor((num*100+0.5)/100).toString();
+        if(cents < 10) 
+            cents = "0" + cents;
+        for (var i = 0; i < Math.floor((num.length-(1+i))/3); i++)
+            num = num.substring(0,num.length-(4*i+3))+','+num.substring(num.length-(4*i+3));
+        return (num + "." + cents+ " €" );
+    }
+  </script>
+</head>
+
+<body bgcolor="#ffff99">
+<CENTER>
+<TABLE>  
+  <TR>
+    <TD>
+      <FORM name=myform>
+      <PRE><B>Comida</B>
+      Filete       15.25 €     <INPUT onclick=this.form.total.value=checkChoice(this); type=checkbox value=15.25 name=Steak>
+      Pollo        12.39 €     <INPUT onclick=this.form.total.value=checkChoice(this); type=checkbox value=12.39 name=Chicken>
+      Merluza      18.75 €     <INPUT onclick=this.form.total.value=checkChoice(this); type=checkbox value=18.75 name=Sushi>
+      <h3>Extras</h3>
+      Merluza      18.75 €     <INPUT onclick=this.form.total.value=checkChoice(this); type=checkbox value=100.10 name=Sushi>
+      <BR>
+      El total es:  <INPUT readOnly size=6 name=total><INPUT type=hidden value=0 name=hiddentotal>
+      </PRE></FORM>
+      <HR width="100%" noshsde>
+      <!--<FORM name=myform2><PRE><B>Bebidas</B>
+      Cerveza       0.50 €     <INPUT onclick=this.form.total.value=checkChoice(this); type=checkbox value=.50 name=Tea>
+      Coca-Cola     0.79 €     <INPUT onclick=this.form.total.value=checkChoice(this); type=checkbox value=.79 name=Cola>
+      Cubata        1.75 €     <INPUT onclick=this.form.total.value=checkChoice(this); type=checkbox value=1.75 name=Coffee>
+      <BR>
+      El total es:  <INPUT readOnly size=6 name=total><INPUT type=hidden value=0 name=hiddentotal>
+      </PRE>
+      </FORM>-->
+    </TD>
+  </TR>
+</TABLE>
+</CENTER>
+</body>
+
+<!-- Mirrored from www.htmlweb.net/manual/formularios/jscript/calculos/ejemplo_4.html by HTTrack Website Copier/3.x [XR&CO'2004], Wed, 29 Sep 2004 15:02:17 GMT -->
+</html>
